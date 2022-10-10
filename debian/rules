@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE=1
+
+include /usr/share/dpkg/pkg-info.mk
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all,-pie
+
+# upstream's version tag and download script
+VER ?= $(DEB_VERSION_UPSTREAM)
+GETVER ?= get-upstream-tarball
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	dh_auto_configure -- --prefix=/usr \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--build=$(DEB_BUILD_GNU_TYPE) \
+		--without-openssl \
+		--with-gnutls \
+		--with-sasl \
+		--enable-unstrict-syntax
+	# HACK to avoid rpath in library
+	sed -i 's/^hardcode_into_libs=yes$$/hardcode_into_libs=no/' libtool
+	# End HACK
+
+execute_before_dh_auto_build:
+	$(MAKE) -C doc doc
+
+override_dh_compress:
+	dh_compress -Xtests
+
+get-orig-source:
+	@test -x ./$(GETVER) || { echo "Error: working dir is not 'debian' dir" && exit 1; }
+	@echo "Downloading..." && ./$(GETVER) $(VER)
+
+.PHONY: get-orig-source

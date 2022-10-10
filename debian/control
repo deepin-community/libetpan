@@ -1,0 +1,53 @@
+Source: libetpan
+Section: mail
+Priority: optional
+Maintainer: Ricardo Mones <mones@debian.org>
+Build-Depends: debhelper-compat (= 13), pkg-config, libtool, libdb-dev,
+ libgnutls28-dev, liblockfile-dev, libsasl2-dev, libexpat1-dev,
+ libcurl4-gnutls-dev (>= 7.16.4-5)
+Build-Depends-Indep: docbook-dsssl, openjade
+Rules-Requires-Root: no
+Standards-Version: 4.5.1
+Homepage: https://www.etpan.org/libetpan.html
+Vcs-Git: https://salsa.debian.org/claws-mail-team/libetpan.git
+Vcs-Browser: https://salsa.debian.org/claws-mail-team/libetpan
+
+Package: libetpan20
+Section: libs
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: mail handling library
+ libEtPan! is a mail library. It may be used for low-level mail handling:
+ network protocols (IMAP/NNTP/POP3/SMTP over TCP/IP with or without SSL),
+ local storage (mbox/MH/maildir) and message/MIME parsing.
+ .
+ This package provides shared library files.
+
+Package: libetpan-dev
+Section: libdevel
+Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, libetpan20 (= ${binary:Version}),
+ libgnutls28-dev, liblockfile-dev, libsasl2-dev, libexpat1-dev,
+ libcurl4-gnutls-dev (>= 7.16.4-5)
+Suggests: libetpan-doc
+Description: mail handling library - development files
+ libEtPan! is a mail library. It may be used for low-level mail handling:
+ network protocols (IMAP/NNTP/POP3/SMTP over TCP/IP with or without SSL),
+ local storage (mbox/MH/maildir) and message/MIME parsing.
+ .
+ This package provides development files for the library.
+
+Package: libetpan-doc
+Section: doc
+Architecture: all
+Multi-Arch: foreign
+Depends: ${misc:Depends}
+Description: mail handling library - API documentation
+ libEtPan! is a mail library. It may be used for low-level mail handling:
+ network protocols (IMAP/NNTP/POP3/SMTP over TCP/IP with or without SSL),
+ local storage (mbox/MH/maildir) and message/MIME parsing.
+ .
+ This package provides library API documentation and test sources.

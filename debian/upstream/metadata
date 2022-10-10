@@ -1,0 +1,8 @@
+Bug-Database: https://github.com/dinhvh/libetpan/issues
+Bug-Submit: https://github.com/dinhvh/libetpan/issues/new/choose
+Changelog: https://github.com/dinhvh/libetpan/releases
+CPE: cpe:/a:libetpan_project:libetpan
+Other-References: https://www.etpan.org/libetpan.html
+Repository: https://github.com/dinhvh/libetpan.git
+Repository-Browse: https://github.com/dinhvh/libetpan
+Security-Contact: Hoà V. DINH <dinh.viet.hoa@gmail.com>
